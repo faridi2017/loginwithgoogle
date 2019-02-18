@@ -1,0 +1,33 @@
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row >
+            <span>loged in with google</span>
+            <span class="example-fill-remaining-space"></span>
+            <span class="align-center"></span>
+            <span class="example-spacer"></span>
+            <button mat-button>Home</button>
+            <button mat-button>Sign out</button>
+            
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>L5</span>
+          </button>
+          <button mat-menu-item (click)="goto_one_module()">
+            <mat-icon>settings_power</mat-icon>
+            <span>Sign Out</span>
+          </button>
+        </mat-menu>
+        <span *ngIf="login_info">Hi {{login_info.name}}</span>&nbsp;&nbsp;&nbsp;
+        <span *ngIf="login_info">{{login_info.email}}</span>
+ </mat-toolbar-row>
+</mat-toolbar>
+ <button (click)="goto_one_module()"
+  class="btn btn-success">Goto module one</button>
