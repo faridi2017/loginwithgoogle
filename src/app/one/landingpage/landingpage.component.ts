@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 import {
   AuthService,
   GoogleLoginProvider
 } from 'angular-6-social-login';
+
+import { User } from 'src/app/modal/user';
+import { ApiserviceService } from 'src/app/apiservice/apiservice.service';
+
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -12,7 +17,10 @@ import {
 export class LandingpageComponent implements OnInit {
   username: string;
   password: string;
-  constructor(private router: Router,private socialAuthService: AuthService) { }
+  user_info: User;
+  constructor(private router: Router,private socialAuthService: AuthService,private loginService: ApiserviceService) { 
+    this.user_info = new User;
+  }
 
   ngOnInit() {
   }
@@ -34,12 +42,17 @@ export class LandingpageComponent implements OnInit {
     );
   }
   login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["home"]);
-    }else {
-      alert("Invalid credentials");
+    this.loginService.login(this.user_info).subscribe((res: any)=> {
+                  
+      console.log('loginurl response', res);
+   
+     },error => {
+      console.error("Error in login api!");
+      alert('wrong user name or password');
+      return throwError(error);  // Angular 6/RxJS 6
+    });  
+
     }
-  }
   goto_two_module(){
     this.router.navigate(['home']);
   }

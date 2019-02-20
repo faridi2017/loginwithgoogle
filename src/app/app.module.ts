@@ -12,6 +12,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from "angular-6-social-login";
+import { HttpClientModule } from '@angular/common/http';
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -35,7 +36,8 @@ export function getAuthServiceConfigs() {
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule
   ],
   providers: [
     {
